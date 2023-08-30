@@ -9,7 +9,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get('http://localhost:5700/posts');
+      const res = await axios.get('http://localhost:2000/posts');
       setPosts(res.data);
     };
     
@@ -18,15 +18,15 @@ const HomePage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5700/posts/${id}`);
-      setPosts(posts.filter((post) => post._id !== id));
+      await axios.delete(`http://localhost:2000/posts/${id}`); //remove item from DB
+      setPosts(posts.filter((post) => post._id !== id)); //remove item from state
     } catch (error) {
       console.error("Error deleting post", error);
     }
   };
 
   return (
-    <Container>
+    <Container className='p-4'>
       <Row>
         {posts.map((post) => (
           <Col md={4} className="mb-4" key={post._id}>
